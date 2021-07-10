@@ -21,6 +21,13 @@ contract Nfto is ERC721{
         bool sold;
         address payable owner;
     }
+
+    event ItemMinted(
+        uint id,
+        string name,
+        string description,
+        address payable owner
+    );
     
     function mintItem(uint256 _price, string memory _name, string memory _description, string memory _cid) public {
         require(_price > 0, "Invalid price");
@@ -28,6 +35,7 @@ contract Nfto is ERC721{
         _safeMint(msg.sender, tokenID);
         _setTokenURI(tokenID, _cid);
         items[tokenID] = Item(tokenID, _price, _name, _description, _cid, false, msg.sender);
+        emit ItemMinted(tokenID, _name, _description, msg.sender);
     }
 }
 
