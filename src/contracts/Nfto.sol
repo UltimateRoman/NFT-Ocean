@@ -22,7 +22,7 @@ contract Nfto is ERC721{
         string name;
         string description;
         string cid;
-        bool sold;
+        bool isListed;
         address payable owner;
     }
 
@@ -53,6 +53,9 @@ contract Nfto is ERC721{
             dCount++;
             dutch[dCount] = items[_id];
         }
+        Item memory item = items[_id];
+        item.isListed = true;
+        items[_id] = item;
         approve(address(this),_id);
     }
 }

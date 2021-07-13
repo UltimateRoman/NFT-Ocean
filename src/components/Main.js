@@ -21,7 +21,10 @@ class Main extends Component {
       const options = {
         headers : {"Authorization": `Bearer ${process.env.REACT_APP_NFTKEY}`}
       }
-      axios.post("https://api.nft.storage/upload",formData,options).then((result)=>{console.log(result.data.value.cid+"/"+result.data.value.files[0].name)})
+      axios.post("https://api.nft.storage/upload",formData,options)
+      .then((result)=>{
+        this.props.mintItem(this.priceinput.current.value,this.nameinput.current.value,this.descinput.current.value,result.data.value.cid+"/"+result.data.value.files[0].name)
+        console.log(result.data.value.cid+"/"+result.data.value.files[0].name)})
     }
 
   }
@@ -30,6 +33,7 @@ class Main extends Component {
     this.fileinput = React.createRef();
     this.nameinput = React.createRef();
     this.descinput = React.createRef();
+    this.priceinput = React.createRef();
     this.state={
       filesSelected: false
     }
@@ -58,6 +62,11 @@ class Main extends Component {
        <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label"><h3>Enter Description</h3></label>
        <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.descinput} placeholder="Description"/>
+       </div>
+       <br/><br/>
+       <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label"><h3>Enter Price(in MATIC)</h3></label>
+       <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.priceinput} placeholder="price"/>
        </div>
        <br/><br/>
        <div class="mb-3">
