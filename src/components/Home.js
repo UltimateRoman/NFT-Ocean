@@ -6,9 +6,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import img1 from './image/1.jpg'
-import img2 from './image/2.jpg'
-import img3 from './image/3.jpg'
+import img1 from './image/4.jpg'
+import img2 from './image/5.jpg'
+import img3 from './image/6.jpg'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Click from './Click'
 
