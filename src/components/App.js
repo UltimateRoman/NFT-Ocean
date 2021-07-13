@@ -4,7 +4,7 @@ import Home from './Home';
 import './App.css';
 import Header from './Header'
 import Main from './Main';
-import { SemipolarSpinner } from 'react-epic-spinners';
+import { TrinityRingsSpinner } from 'react-epic-spinners';
 
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
               <React.Fragment>
                 {
                   this.state.loading
-                    ? <div class="center"><SemipolarSpinner size="100" color="blue" /></div>
+                    ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
                     : <Main/>
                 }
               </React.Fragment>)} />
