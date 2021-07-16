@@ -33,6 +33,7 @@ contract Nfto is ERC721{
         uint tId;
         uint256 offerAmount;
         address bidder;
+        address auctioneer;
         bool isApproved;
     }
 
@@ -83,7 +84,6 @@ contract Nfto is ERC721{
         Item memory item = items[_id];
         item.isListed = true;
         items[_id] = item;
-        approve(address(this),_id);
         emit ItemListed(_id, eCount, dCount, item.isListed);
     }
 
@@ -108,7 +108,37 @@ contract Nfto is ERC721{
         }
 
         offerCount++;
-        offers[offerCount] = Offer(offerCount, _tId, _amount, msg.sender, false);
+        offers[offerCount] = Offer(offerCount, _tId, _amount, msg.sender, item.owner, false);
+    }
+
+
+    function approveOffer(uint _id) public {
+        require(_id > 0 && _id <= offerCount, "Invalid Id");
+
+        Offer memory offer = offers[_id];
+        uint tId = offer.tId;
+        address bidder = offer.bidder;
+        offer.isApproved = true;
+        offers[_id] = offer;
+        approve(bidder, tId);
+    }
+
+
+    function purchaseItem(uint _tId) public payable {
+        require(_tId > 0 && _tId <= tokenID, "Invalid Id");
+
+        Item memory item = items[_tId];
+        address payable owner = item.owner;
+        (bool isSent, bytes memory data) = owner.call{value: msg.value}("");
+
+        if(isSent) {
+            safeTransferFrom(owner, msg.sender, _tId);
+            item.isListed = false;
+            item.owner = msg.sender;
+            items[_tId] = item;
+        }
+
+        require(isSent, "ETH not transferred");
     }
 }
 
