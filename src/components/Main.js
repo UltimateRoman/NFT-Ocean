@@ -11,6 +11,7 @@ const WhiteTextTypography = withStyles({
 })(Typography);
 
 class Main extends Component {
+
   onSubmit = event => {
     event.preventDefault();
     console.log(this.nameinput.current.value);
@@ -28,6 +29,7 @@ class Main extends Component {
     }
 
   }
+
   constructor(props) {
     super(props);
     this.fileinput = React.createRef();
@@ -38,7 +40,8 @@ class Main extends Component {
       filesSelected: false
     }
   }
-    render() {
+
+  render() {
     return (
       <React.Fragment>
           <br/><br/>
@@ -49,12 +52,12 @@ class Main extends Component {
                 </WhiteTextTypography>
             </Typography>
           <br /><br/>
-    <center>
+      <center>
       <div style={{width:700, backgroundColor: '#00e6e6'}} >
       <div style={{width:600}}>
       <form onSubmit={this.onSubmit} noValidate autoComplete="off">
       <div class="mb-3">
-        <br/>
+      <br/>
       <label for="exampleFormControlTextarea1" class="form-label"><h3>Enter item name</h3></label>
        <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.nameinput} placeholder="Name"/>
        </div>
