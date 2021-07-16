@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Web3 from 'web3';
 import Home from './Home';
-import './App.css';
 import Header from './Header'
 import Main from './Main';
+import Nfto from '../abis/Nfto.json';
 import { TrinityRingsSpinner } from 'react-epic-spinners';
-import Web3 from 'web3';
-import Nfto from '../abis/Nfto.json'
+import './App.css';
 
 class App extends Component {
 
