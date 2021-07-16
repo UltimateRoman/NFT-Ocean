@@ -20,9 +20,11 @@ class App extends Component {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum)
       await window.ethereum.enable()
+      this.setState({ isConnected: true })
     }
     else if (window.web3) {
       window.web3 = new Web3(window.web3.currentProvider)
+      this.setState({ isConnected: true })
     }
     else {
       window.alert('Browser not supported. Use the MetaMask extension!')
@@ -80,7 +82,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      connected: false,
+      isConnected: false,
       loading: true,
       nfto: null,
       latestPrice: 1,
@@ -93,23 +95,29 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <Router>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route exact path="/mint" render={props => (
-              <React.Fragment>
-                {
-                  this.state.loading
-                    ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
-                    : <Main mintItem={this.mintItem}/>
-                }
-              </React.Fragment>)} 
-          />
-        </Switch>
-      </Router>
-    );
+    if(this.state.isConnected) {
+      return (
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/mint" render={props => (
+                <React.Fragment>
+                  {
+                    this.state.loading
+                      ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
+                      : <Main mintItem={this.mintItem}/>
+                  }
+                </React.Fragment>)} 
+            />
+          </Switch>
+        </Router>
+      );
+    } else {
+      return(
+        <p style={{textAlign: "center"}}>Your current browser is not supported. Install the Metamask extension and try again.</p>
+      );
+    }
   }
 }
 
