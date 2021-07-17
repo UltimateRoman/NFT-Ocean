@@ -78,10 +78,10 @@ function Homepage() {
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                    Decentralized marketplace
+                    Vickery Auction
                     </Typography>
                     <Typography>
-                    NFTs allow creators to make money directly from their work. A great example is art, where someone would require an agent to sell and market their work. NFTs eliminate these middlemen and allow the artists or the original creators to interact and transact directly with their customers. 
+                    A Vickrey auction is a sealed-bid auction where bidders submit bids without knowing the bids of other people. However, as opposed to other sealed-bid auctions, the price paid is the second-highest bid price and not the winning bid price. In a Vickrey auction, the individual is bidding their true value and are not trying to assess what everyone else is going to bid. 
                     </Typography>
                   </CardContent>
                 </Card>
@@ -93,10 +93,10 @@ function Homepage() {
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                    Unique
+                    English Auction
                     </Typography>
                     <Typography>
-                    They are rare in that only one of them can exist and can’t be easily forged. In most cases, an artist or a seller will have a handful of NFTs — as opposed to thousands. It is therefore safe to assume that you will be one of the few individuals that would own these collectibles
+                    An English Auction, also referred to as an open cry ascending auction, starts by an auctioneer announcing the suggested opening bid or reserve price for the item on sale. The buyers with interest in the item start placing bids on the item on sale, with the auctioneer accepting higher bids as they come. The buyer with the highest bid at any time is considered the one with a standing bid, which can only be displaced by a higher bid from the floor. If there are no higher bids than the standing bid, the auctioneer announces the winner, and the item is sold to the person with the standing bid at a price equal to their bid. 
                     </Typography>
                   </CardContent>
                 </Card>
@@ -108,10 +108,10 @@ function Homepage() {
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                    Immutable
+                    Dutch Auction
                     </Typography>
                     <Typography>
-                    The metadata on the token can never be altered by anyone. Also, it can neither get erased, misplaced nor be removed from the blockchain. Basically, they are meant to last forever as their data will always remain as is. This in itself, gives them collectability and high value.
+                    A Dutch auction is a price discovery process in which the auctioneer starts with the highest asking price and lowers it until it reaches a price level where the bids received will cover the entire offer quantity. Alternatively, a Dutch auction is known as a descending price auction or a uniform price auction. Dutch auctions are appropriate for instances where a large quantity of an item is being offered for sale, as opposed to just a single item. The goal of a Dutch auction is the find the optimal price at which to sell a security. 
                     </Typography>
                   </CardContent>
                 </Card>
