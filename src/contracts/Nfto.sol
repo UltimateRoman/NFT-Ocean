@@ -12,11 +12,13 @@ contract Nfto is ERC721{
     uint offerCount;
     uint eCount;
     uint dCount;
+    uint vCount;
     
     mapping(uint => Item) items;
     mapping(uint => Offer) offers;
     mapping(uint => Item) english;
     mapping(uint => Item) dutch;
+    mapping(uint => Item) vickery;
 
     struct Item {
         uint id;
@@ -81,6 +83,14 @@ contract Nfto is ERC721{
             dutch[dCount] = item;
         }
 
+        else if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("vickery")))) {
+            vCount++;
+            vickery[vCount] = items[_id];
+            Item memory item = vickery[vCount];
+            item.latestPrice = _price;
+            vickery[vCount] = item;
+        }
+
         Item memory item = items[_id];
         item.isListed = true;
         items[_id] = item;
@@ -90,25 +100,64 @@ contract Nfto is ERC721{
 
     function makeOffer(uint _id, uint _tId, uint256 _amount, string memory _type) public {
         require(_tId > 0 && _tId <= tokenID, "Invalid Id");
-        Item memory item = items[_tId];
-        require(item.isListed == true, "Item not listed");
+        Item memory _item = items[_tId];
+        require(_item.isListed == true, "Item not listed");
+
+        offerCount++;
+        offers[offerCount] = Offer(offerCount, _tId, _amount, msg.sender, _item.owner, false);
 
         if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("english")))) {
-            require(_amount > item.latestPrice, "Invalid price");
+            require(_amount < _item.latestPrice, "Invalid price");
             Item memory item = english[_id];
             item.latestPrice = _amount;
             english[_id] = item;
         }
 
         else if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("dutch")))) {
-            require(_amount < item.latestPrice, "Invalid price");
+            require(_amount > _item.latestPrice, "Invalid price");
             Item memory item = dutch[_id];
             item.latestPrice = _amount;
             dutch[_id] = item;
         }
 
-        offerCount++;
-        offers[offerCount] = Offer(offerCount, _tId, _amount, msg.sender, item.owner, false);
+        else if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("vickery")))) {
+            require(_amount < _item.latestPrice, "Invalid price");
+            Item memory item = vickery[_id];
+            uint i;
+            uint j;
+            Offer[5] memory itemOffers;
+            for(i = 1; i <= offerCount; ++i) {
+                if(offers[i].tId == vickery[_id].id) {
+                    j++;
+                    itemOffers[j] = offers[i];
+                }
+            }
+            if(j == 1) {
+                item.latestPrice = itemOffers[1].offerAmount;
+            }
+            else if(j > 1) {
+                uint largestAmount;
+                uint seclargestAmount;
+                largestAmount = itemOffers[1].offerAmount;
+                for(i = 1; i <= j; ++i) {
+                    if(itemOffers[i].offerAmount > largestAmount) {
+                        largestAmount = itemOffers[i].offerAmount;
+                    }
+                }
+                for(i = 1; i <= j; ++i) {
+                    if(itemOffers[i].offerAmount != largestAmount) {
+                        if(itemOffers[i].offerAmount > seclargestAmount) {
+                            seclargestAmount = itemOffers[i].offerAmount;
+                        }
+                    }
+                }
+                item.latestPrice = seclargestAmount;
+            }
+            else {
+                item.latestPrice = _amount;
+            }
+            vickery[_id] = item;
+        }
     }
 
 
