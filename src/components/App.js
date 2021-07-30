@@ -42,13 +42,54 @@ class App extends Component {
     if(networkData) {
       const nfto = web3.eth.Contract(Nfto.abi, networkData.address)
       this.setState({ nfto })
-      const tokenID = await nfto.methods.tokenID().call()
+      const tokenID = await nfto.methods.tokenID.call()
 
       for (var i = 1; i <= tokenID; i++) {
         const item = await nfto.methods.items(i).call()
         if (item.owner === this.state.account) {
           this.setState({
             myItems: [...this.state.myItems, item]
+          })
+        }
+      }
+
+      const eCount = await nfto.methods.eCount.call()
+      const dCount = await nfto.methods.dCount.call()
+      const vCount = await nfto.methods.vCount.call()
+
+      for (var i = 1; i <= eCount; i++) {
+        const item = await nfto.methods.english(i).call()
+        this.setState({
+          englishItems: [...this.state.englishItems, item]
+        })
+      }
+
+      for (var i = 1; i <= dCount; i++) {
+        const item = await nfto.methods.dutch(i).call()
+        this.setState({
+          dutchItems: [...this.state.dutchItems, item]
+        })
+      }
+
+      for (var i = 1; i <= vCount; i++) {
+        const item = await nfto.methods.vickery(i).call()
+        this.setState({
+          vickeryItems: [...this.state.vickeryItems, item]
+        })
+      }
+
+      const offerCount = await nfto.methods.offerCount.call()
+
+      for (var i = 1; i <= offerCount; i++) {
+        const offer = await nfto.methods.offers(i).call()
+        if (offer.auctioneer === this.state.account) {
+          this.setState({
+            receivedOffers: [...this.state.receivedOffers, offer]
+          })
+        }
+        else if (offer.bidder === this.state.account) {
+          this.setState({
+            placedOffers: [...this.state.placedOffers, offer]
           })
         }
       }
@@ -88,7 +129,10 @@ class App extends Component {
       latestPrice: 1,
       englishItems: [],
       dutchItems: [],
-      myItems: []
+      vickeryItems: [],
+      myItems: [],
+      receivedOffers: [],
+      placedOffers: []
     }
 
     this.mintItem = this.mintItem.bind(this)
