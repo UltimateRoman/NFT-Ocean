@@ -111,7 +111,7 @@ class App extends Component {
     });
   }
   
-  mintItem(price, name, description, cid){
+  mintItem(price, name, description, cid) {
     this.setState({ loading: true })
     this.state.nfto.methods.mintItem(window.web3.utils.toWei(price.toString(), 'ether'), name, description, cid).send({ from: this.state.account })
     .once('confirmation', (n, receipt) => {
@@ -119,6 +119,43 @@ class App extends Component {
       window.location.href = '/'
     })
   }
+
+  listItem(id, type, price) {
+    this.setState({ loading: true })
+    this.state.nfto.methods.listItem(id, type, window.web3.utils.toWei(price.toString(), 'ether')).send({ from: this.state.account })
+    .once('confirmation', (n, receipt) => {
+      this.setState({ loading: false })
+      window.location.href = '/'
+    })
+  }
+
+  makeOffer(id, tId, amount, type) {
+    this.setState({ loading: true })
+    this.state.nfto.methods.makeOffer(id, tId, window.web3.utils.toWei(amount.toString(), 'ether'), type).send({ from: this.state.account })
+    .once('confirmation', (n, receipt) => {
+      this.setState({ loading: false })
+      window.location.href = '/'
+    })
+  }
+
+  approveOffer(id) {
+    this.setState({ loading: true })
+    this.state.nfto.methods.approveOffer(id).send({ from: this.state.account })
+    .once('confirmation', (n, receipt) => {
+      this.setState({ loading: false })
+      window.location.href = '/'
+    })
+  }
+
+  purchaseItem(tId, amount) {
+    this.setState({ loading: true })
+    this.state.nfto.methods.purchaseItem(tId).send({ from: this.state.account, value: window.web3.utils.toWei(amount.toString(), 'ether') })
+    .once('confirmation', (n, receipt) => {
+      this.setState({ loading: false })
+      window.location.href = '/'
+    })
+  }
+  
 
   constructor(props){
     super(props)
@@ -136,6 +173,10 @@ class App extends Component {
     }
 
     this.mintItem = this.mintItem.bind(this)
+    this.listItem = this.listItem.bind(this)
+    this.makeOffer = this.makeOffer.bind(this)
+    this.approveOffer = this.approveOffer.bind(this)
+    this.purchaseItem = this.purchaseItem.bind(this)
   }
 
   render() {
