@@ -11,7 +11,7 @@ function Header() {
 
       <Navbar bg="light" expand="lg">
         <Navbar.Brand href="/">
-            <h3>NFT Ocean      </h3>
+            <h3>NFT Ocean</h3>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse>
@@ -19,14 +19,22 @@ function Header() {
             <Nav.Link href="/">
                 <h4>Home</h4></Nav.Link>
                 &emsp;&emsp;&emsp;&emsp;
+
+            <Nav.Link href="/mint">
+                <h4>Mint NFT</h4></Nav.Link>
+                &emsp;&emsp;&emsp;&emsp;
+            
             <Nav.Link href="/">
-                <h4>Gallery</h4></Nav.Link>
+                <h4>Auction House</h4></Nav.Link>
                 &emsp;&emsp;&emsp;&emsp;
             <Nav.Link href="/">
-                <h4>NFT</h4></Nav.Link>
+                <h4>Your NFTs</h4></Nav.Link>
                 &emsp;&emsp;&emsp;&emsp;
             <Nav.Link href="/">
-                <h4>Profile</h4>
+                <h4>Offers Received</h4>
+            </Nav.Link>
+            <Nav.Link href="/">
+                <h4>Offers Placed</h4>
             </Nav.Link>
           </Nav>
           
