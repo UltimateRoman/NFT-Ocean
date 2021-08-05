@@ -10,10 +10,10 @@ module.exports = {
     development: {
       host: "127.0.0.1",
       port: 8545,
-      network_id: "*" 
+      network_id: "*"
     },
     mumbai: {
-      provider: () => new HDWalletProvider(mnemonic, "https://rpc-mumbai.maticvigil.com/"),
+      provider: () => new HDWalletProvider(mnemonic, "https://matic-mumbai.chainstacklabs.com/"),
       network_id: 80001,
       confirmations: 2,
       timeoutBlocks: 200,

@@ -14,7 +14,6 @@ class Main extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    console.log(this.nameinput.current.value);
     if(this.state.filesSelected){
       var formData = new FormData();
      

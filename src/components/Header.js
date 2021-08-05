@@ -24,7 +24,7 @@ function Header() {
                 <h4>Mint NFT</h4></Nav.Link>
                 &emsp;&emsp;&emsp;&emsp;
             
-            <NavDropdown title="Auction House" id="basic-nav-dropdown">
+            <NavDropdown title="Auction House" style={{fontSize:24}} id="basic-nav-dropdown">
                 <NavDropdown.Item href="/english">English Auction</NavDropdown.Item>
                 <NavDropdown.Item href="/dutch">Dutch Auction</NavDropdown.Item>
                 <NavDropdown.Item href="/vickery">Vickery Auction</NavDropdown.Item>

@@ -7,7 +7,7 @@ import Main from './Main';
 import Nfto from '../abis/Nfto.json';
 import { TrinityRingsSpinner } from 'react-epic-spinners';
 import './App.css';
-
+import Yournfts from './Yournfts';
 class App extends Component {
 
   async componentWillMount() {
@@ -40,11 +40,12 @@ class App extends Component {
     const networkData = Nfto.networks[networkId]
 
     if(networkData) {
-      const nfto = web3.eth.Contract(Nfto.abi, networkData.address)
+      const nfto = new web3.eth.Contract(Nfto.abi, networkData.address)
       this.setState({ nfto })
-      const tokenID = await nfto.methods.tokenID.call()
 
-      for (var i = 1; i <= tokenID; i++) {
+      const result = await nfto.methods.retValues().call()
+
+      for (var i = 1; i <= result[0]; i++) {
         const item = await nfto.methods.items(i).call()
         if (item.owner === this.state.account) {
           this.setState({
@@ -53,9 +54,9 @@ class App extends Component {
         }
       }
 
-      const eCount = await nfto.methods.eCount.call()
-      const dCount = await nfto.methods.dCount.call()
-      const vCount = await nfto.methods.vCount.call()
+      const eCount = result[1]
+      const dCount = result[2]
+      const vCount = result[3]
 
       for (var i = 1; i <= eCount; i++) {
         const item = await nfto.methods.english(i).call()
@@ -78,7 +79,7 @@ class App extends Component {
         })
       }
 
-      const offerCount = await nfto.methods.offerCount.call()
+      const offerCount = result[4]
 
       for (var i = 1; i <= offerCount; i++) {
         const offer = await nfto.methods.offers(i).call()
@@ -192,6 +193,15 @@ class App extends Component {
                     this.state.loading
                       ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
                       : <Main mintItem={this.mintItem}/>
+                  }
+                </React.Fragment>)} 
+            />
+            <Route exact path="/yournfts" render={props => (
+                <React.Fragment>
+                  {
+                    this.state.loading
+                      ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
+                      : <Yournfts myItems={this.state.myItems} listItem={this.listItem}/>
                   }
                 </React.Fragment>)} 
             />
