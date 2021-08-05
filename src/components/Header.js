@@ -2,7 +2,7 @@ import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 function Header() {
   return (
@@ -24,16 +24,24 @@ function Header() {
                 <h4>Mint NFT</h4></Nav.Link>
                 &emsp;&emsp;&emsp;&emsp;
             
-            <Nav.Link href="/">
-                <h4>Auction House</h4></Nav.Link>
+            <NavDropdown title="Auction House" id="basic-nav-dropdown">
+                <NavDropdown.Item href="/english">English Auction</NavDropdown.Item>
+                <NavDropdown.Item href="/dutch">Dutch Auction</NavDropdown.Item>
+                <NavDropdown.Item href="/vickery">Vickery Auction</NavDropdown.Item>
+            </NavDropdown>
                 &emsp;&emsp;&emsp;&emsp;
-            <Nav.Link href="/">
-                <h4>Your NFTs</h4></Nav.Link>
+
+            <Nav.Link href="/yournfts">
+                <h4>Your NFTs</h4>
+            </Nav.Link>
                 &emsp;&emsp;&emsp;&emsp;
-            <Nav.Link href="/">
+
+            <Nav.Link href="/offersr">
                 <h4>Offers Received</h4>
             </Nav.Link>
-            <Nav.Link href="/">
+            &emsp;&emsp;&emsp;&emsp;
+
+            <Nav.Link href="/offersp">
                 <h4>Offers Placed</h4>
             </Nav.Link>
           </Nav>
