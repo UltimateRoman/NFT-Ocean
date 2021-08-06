@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { withStyles } from "@material-ui/core/styles";
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import TextField from '@material-ui/core/TextField';
+
 import Typography from "@material-ui/core/Typography";
 import {
   Grid,
@@ -23,7 +28,19 @@ const WhiteTextTypography = withStyles({
 })(Typography);
 
 
+
 class Yournfts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      category: "english"
+    }
+    this.handleChange = this.handleChange.bind(this)
+
+  }
+  handleChange = (event) => {
+    this.setState({category: event.target.value});
+  };
   render() {
       const {classes} = this.props
     return (
@@ -55,12 +72,34 @@ class Yournfts extends Component {
                         {`Description : ${item.description}`}
                         <br/>
                         Base Price: {window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether')}
-                    </CardContent>
+                    
                     <img src={item.cid} height="250" width="350"/>
                     <br/>
-                    <button onClick={openModal}>List Item</button>
-                    {showModal ? <Modal setShowModal={setShowModal} /> : null}
-                </Card>
+                    <h4>List NFT for Auction</h4>
+                    <InputLabel id="demo-simple-select-label">Auction method</InputLabel>
+                    <form onSubmit={(event)=>{
+                      event.preventDefault();
+                      const category = this.state.category
+                      const price = this.price.value
+                      this.props.listItem(category, price)
+                    }}>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={this.state.category}
+                      onChange={this.handleChange}
+                     >
+                      <MenuItem value="english">English Auction</MenuItem>
+                      <MenuItem value="dutch">Dutch Auction</MenuItem>
+                      <MenuItem value="vickery">Vickery Auction</MenuItem>
+                    </Select>
+                    <br/><br/>
+                    <TextField id="outlined-basic" label="Price" variant="outlined" />
+                    <br/><br/>
+                    <button type="submit" class="btn btn-primary mb-3">List NFT for Auction</button>
+                    </form>
+                    </CardContent>
+                  </Card>
                 </Grid>
             ))}
             </Grid>

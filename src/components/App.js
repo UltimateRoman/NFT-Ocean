@@ -13,7 +13,7 @@ class App extends Component {
   async componentWillMount() {
     await this.loadWeb3()
     await this.loadBlockchainData()
-    await this.fetchLatestPrice()
+   // await this.fetchLatestPrice()
   }
 
   async loadWeb3() {
