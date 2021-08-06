@@ -75,9 +75,9 @@ class Yournfts extends Component {
                       <br/>
                       {item.description}
                         <br/>
-                        Base Price: {window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether')} MATIC  
+                        Base Price: {window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether')} MATIC | $ {(parseInt(window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether'))*parseInt(this.props.latestPrice.toString())).toString()}
                         <br/>                 
-                    <img src={item.cid} height="250" width="350" alt="NFT image"/>
+                    <img src={`${item.cid}.ipfs.dweb.link`} height="250" width="350" alt="NFT image"/>
                     <br/><br/>
                     <h4 style={{color: "DarkCyan"}}>List NFT for Auction</h4>
                     <InputLabel id="demo-simple-select-label">Auction method</InputLabel>
@@ -101,8 +101,7 @@ class Yournfts extends Component {
                       <MenuItem value="vickery">Vickery Auction</MenuItem>
                     </Select>
                     <br/><br/>
-                    {/* <TextField id="price" ref={this.priceinput} label="Auctioning Price" variant="outlined" required/> */}
-                    <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.priceinput} placeholder="Auctioning Price"/>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.priceinput} placeholder="Auctioning Price" />
                     <br/><br/>
                     <button type="submit" class="btn btn-info mb-3">Confirm</button>
                     </form>

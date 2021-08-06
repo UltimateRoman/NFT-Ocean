@@ -193,6 +193,7 @@ class App extends Component {
     if(this.state.isConnected) {
       return (
         <Router>
+          <div style={{ height: 800 }}>
           <Header />
           <Switch>
             <Route exact path="/" component={Home}/>
@@ -210,7 +211,7 @@ class App extends Component {
                   {
                     this.state.loading
                       ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
-                      : <Yournfts myItems={this.state.myItems} listItem={this.listItem}/>
+                      : <Yournfts myItems={this.state.myItems} listItem={this.listItem} latestPrice={this.state.latestPrice} />
                   }
                 </React.Fragment>)} 
             />
@@ -260,6 +261,7 @@ class App extends Component {
                 </React.Fragment>)} 
             />
           </Switch>
+          </div>
         </Router>
       );
     } else {

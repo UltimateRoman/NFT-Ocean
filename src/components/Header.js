@@ -1,8 +1,7 @@
 import React from "react";
-
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+import logo from '../logo.png';
 
 function Header() {
   return (
@@ -10,9 +9,17 @@ function Header() {
       <div style={{ paddingBottom: "10px", backgroundColor: "blue" }}></div>
 
       <Navbar bg="light" expand="lg">
+      <Container>
         <Navbar.Brand href="/">
-            <h3>NFT Ocean</h3>
+          <img
+            src={logo}
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+            alt="React Boots logo"
+          />
         </Navbar.Brand>
+      </Container>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse>
           <Nav className="mr-auto">

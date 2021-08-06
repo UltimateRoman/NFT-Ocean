@@ -15,7 +15,7 @@ class Offersreceived extends Component {
                                 <Card>
                                     <Card.Header>Offer for NFT {offer.tId.toString()}</Card.Header>
                                     <Card.Body>
-                            <Card.Title>Offered Amount: {window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether')} MATIC | $ {(parseInt(window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether'))/parseInt(this.props.latestPrice.toString())).toString()}</Card.Title>
+                            <Card.Title>Offered Amount: {window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether')} MATIC | $ {(parseInt(window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether'))*parseInt(this.props.latestPrice.toString())).toString()}</Card.Title>
                                         <Card.Text>
                                             Bidder: {offer.bidder}
                                         </Card.Text>
