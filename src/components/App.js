@@ -43,9 +43,9 @@ class App extends Component {
       const nfto = new web3.eth.Contract(Nfto.abi, networkData.address)
       this.setState({ nfto })
 
-      const result = await nfto.methods.retValues().call()
+      const tokenId = await nfto.methods.tokenId().call()
 
-      for (var i = 1; i <= result[0]; i++) {
+      for (var i = 1; i <= tokenId; i++) {
         const item = await nfto.methods.items(i).call()
         if (item.owner === this.state.account) {
           this.setState({
@@ -54,34 +54,34 @@ class App extends Component {
         }
       }
 
-      const eCount = result[1]
-      const dCount = result[2]
-      const vCount = result[3]
+      const eCount = await nfto.methods.eCount().call()
+      const dCount = await nfto.methods.dCount().call()
+      const vCount = await nfto.methods.vCount().call()
 
-      for (var i = 1; i <= eCount; i++) {
+      for (i = 1; i <= eCount; i++) {
         const item = await nfto.methods.english(i).call()
         this.setState({
           englishItems: [...this.state.englishItems, item]
         })
       }
 
-      for (var i = 1; i <= dCount; i++) {
+      for (i = 1; i <= dCount; i++) {
         const item = await nfto.methods.dutch(i).call()
         this.setState({
           dutchItems: [...this.state.dutchItems, item]
         })
       }
 
-      for (var i = 1; i <= vCount; i++) {
+      for (i = 1; i <= vCount; i++) {
         const item = await nfto.methods.vickery(i).call()
         this.setState({
           vickeryItems: [...this.state.vickeryItems, item]
         })
       }
 
-      const offerCount = result[4]
+      const offerCount = await nfto.methods.offerCount().call()
 
-      for (var i = 1; i <= offerCount; i++) {
+      for (i = 1; i <= offerCount; i++) {
         const offer = await nfto.methods.offers(i).call()
         if (offer.auctioneer === this.state.account) {
           this.setState({

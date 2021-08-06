@@ -7,17 +7,17 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 contract Nfto is ERC721 {
     constructor() public ERC721("Nfto", "NFTO") {}
     
-    uint tokenId;
-    uint offerCount;
-    uint eCount;
-    uint dCount;
-    uint vCount;
+    uint public tokenId;
+    uint public offerCount;
+    uint public eCount;
+    uint public dCount;
+    uint public vCount;
     
-    mapping(uint => Item) items;
-    mapping(uint => Offer) offers;
-    mapping(uint => Item) english;
-    mapping(uint => Item) dutch;
-    mapping(uint => Item) vickery;
+    mapping(uint => Item) public items;
+    mapping(uint => Offer) public offers;
+    mapping(uint => Item) public english;
+    mapping(uint => Item) public dutch;
+    mapping(uint => Item) public vickery;
 
     struct Item {
         uint id;
@@ -51,9 +51,6 @@ contract Nfto is ERC721 {
         uint dCount,
         bool isListed
     );
-    function retValues() external view returns(uint,uint,uint,uint,uint) {
-        return (tokenId,eCount,dCount,vCount,offerCount);
-    }
     
     function mintItem(uint256 _price, string memory _name, string memory _description, string memory _cid) external {
         require(_price > 0, "Invalid price");
