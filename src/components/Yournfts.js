@@ -22,6 +22,7 @@ const WhiteTextTypography = withStyles({
   }
 })(Typography);
 
+
 class Yournfts extends Component {
   render() {
       const {classes} = this.props
@@ -49,14 +50,16 @@ class Yournfts extends Component {
                 <Grid item xs={3} key={item.id}>
                 <Card>
                     <CardHeader
-                    title={`Name : ${item.name}`}
-                    subheader={`Description : ${item.description}`}
-                    />
+                    title={`Name : ${item.name}`}    />
                     <CardContent>
-                    <Typography variant="h5" gutterBottom>
-                        Hello World
-                    </Typography>
+                        {`Description : ${item.description}`}
+                        <br/>
+                        Base Price: {window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether')}
                     </CardContent>
+                    <img src={item.cid} height="250" width="350"/>
+                    <br/>
+                    <button onClick={openModal}>List Item</button>
+                    {showModal ? <Modal setShowModal={setShowModal} /> : null}
                 </Card>
                 </Grid>
             ))}
