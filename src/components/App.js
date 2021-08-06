@@ -139,9 +139,9 @@ class App extends Component {
     })
   }
 
-  makeOffer(id, tId, amount, type) {
+  makeOffer(id, amount, type) {
     this.setState({ loading: true })
-    this.state.nfto.methods.makeOffer(id, tId, window.web3.utils.toWei(amount.toString(), 'ether'), type).send({ from: this.state.account })
+    this.state.nfto.methods.makeOffer(id, window.web3.utils.toWei(amount.toString(), 'ether'), type).send({ from: this.state.account })
     .once('confirmation', (n, receipt) => {
       this.setState({ loading: false })
       window.location.href = '/'

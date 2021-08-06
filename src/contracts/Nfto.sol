@@ -53,18 +53,21 @@ contract Nfto is ERC721 {
         if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("english")))) {
             eCount++;
             english[eCount] = items[_id];
+            english[eCount].owner = msg.sender;
             english[eCount].latestPrice = _price;
         }
 
         else if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("dutch")))) {
             dCount++;
             dutch[dCount] = items[_id];
+            dutch[dCount].owner = msg.sender;
             dutch[dCount].latestPrice = _price;
         }
 
         else if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("vickery")))) {
             vCount++;
             vickery[vCount] = items[_id];
+            vickery[vCount].owner = msg.sender;
             vickery[vCount].latestPrice = _price;
         }
 

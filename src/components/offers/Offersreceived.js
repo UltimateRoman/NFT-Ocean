@@ -10,7 +10,7 @@ class Offersreceived extends Component {
                 <div className="row">
                     <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ margin: '0% 15%' }}>
                         <h1>Offers you have received</h1>
-                        {this.props.offersReceived.map((offer, key) => {
+                        {this.props.receivedOffers.map((offer, key) => {
                             return (
                                 <Card>
                                     <Card.Header>Offer for NFT {offer.tId.toString()}</Card.Header>

@@ -10,7 +10,7 @@ class Offersplaced extends Component {
                 <div className="row">
                     <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ margin: '0% 15%' }}>
                         <h1>Offers you have placed</h1>
-                        {this.props.offersPlaced.map((offer, key) => {
+                        {this.props.placedOffers.map((offer, key) => {
                             return (
                                 <Card>
                                     <Card.Header>Bid for NFT {offer.tId.toString()}</Card.Header>

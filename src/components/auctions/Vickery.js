@@ -29,7 +29,10 @@ const WhiteTextTypography = withStyles({
 
 
 class Vickery extends Component {
-
+  constructor(props) {
+    super(props);
+    this.priceinput = React.createRef();
+  }
   render() {
     const {classes} = this.props
     return (
@@ -44,32 +47,33 @@ class Vickery extends Component {
           
         <center>
         <div className={classes.root}>
-        {this.props.vickeryItems.map((item) => (
           <Grid
             container
-            spacing={2}
+            spacing={10}
             direction="row"
             justify="flex-start"
             alignItems="flex-start"
           >
             {this.props.vickeryItems.map((item) => (
-                <Grid item xs={3} key={item.id}>
+                <Grid item xs={4} key={item.id}>
                 <Card>
                     <CardHeader
                     title={item.name}    />
                     <CardContent>
                       {item.description}
                         <br/>              
+                        Current Price: {window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether')} MATIC  
                     <img src={item.cid} height="250" width="350" alt="NFT image"/>
+
                     <br/><br/>
                     <h4 style={{color: "DarkCyan"}}>Bid for this NFT</h4>
                     <form onSubmit={(event)=>{
                       event.preventDefault();
-                      const price = this.price.value
+                      const price = this.priceinput.current.value
                       this.props.makeOffer(item.id, price, "vickery")
                     }}>
                     <br/><br/>
-                    <TextField id="price" ref={(input) => { this.price = input }} label="Bid Price" variant="outlined" required/>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.priceinput} placeholder="Bid Price"/>
                     <br/><br/>
                     <button type="submit" class="btn btn-info mb-3">Make Offer</button>
                     </form>
@@ -79,7 +83,6 @@ class Vickery extends Component {
                 </Grid>
             ))}
           </Grid>
-        ))}
         </div>
       </center>
       </React.Fragment>

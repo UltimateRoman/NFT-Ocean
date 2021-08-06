@@ -26,9 +26,12 @@ const WhiteTextTypography = withStyles({
   }
 })(Typography);
 
-
-
 class Dutch extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.priceinput = React.createRef();
+  }
 
   render() {
     const {classes} = this.props
@@ -44,16 +47,15 @@ class Dutch extends Component {
           
         <center>
         <div className={classes.root}>
-        {this.props.dutchItems.map((item) => (
           <Grid
             container
-            spacing={2}
+            spacing={10}
             direction="row"
             justify="flex-start"
             alignItems="flex-start"
           >
             {this.props.dutchItems.map((item) => (
-                <Grid item xs={3} key={item.id}>
+                <Grid item xs={4} key={item.id}>
                 <Card>
                     <CardHeader
                     title={item.name}    />
@@ -67,11 +69,11 @@ class Dutch extends Component {
                     <h4 style={{color: "DarkCyan"}}>Bid for this NFT</h4>
                     <form onSubmit={(event)=>{
                       event.preventDefault();
-                      const price = this.price.value
+                      const price = this.priceinput.current.value
                       this.props.makeOffer(item.id, price, "dutch")
                     }}>
                     <br/><br/>
-                    <TextField id="price" ref={(input) => { this.price = input }} label="Bid Price" variant="outlined" required/>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.priceinput} placeholder="Bid Price"/>
                     <br/><br/>
                     <button type="submit" class="btn btn-info mb-3">Make Offer</button>
                     </form>
@@ -81,7 +83,6 @@ class Dutch extends Component {
                 </Grid>
             ))}
           </Grid>
-        ))}
         </div>
       </center>
       </React.Fragment>

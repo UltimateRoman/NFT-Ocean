@@ -32,6 +32,8 @@ const WhiteTextTypography = withStyles({
 class Yournfts extends Component {
   constructor(props) {
     super(props);
+    this.priceinput = React.createRef();
+
     this.state = {
       category: "english"
     }
@@ -56,21 +58,20 @@ class Yournfts extends Component {
           
         <center>
         <div className={classes.root}>
-        {this.props.myItems.map((item) => (
           <Grid
             container
-            spacing={2}
+            spacing={10}
             direction="row"
             justify="flex-start"
             alignItems="flex-start"
           >
             {this.props.myItems.map((item) => (
-                <Grid item xs={3} key={item.id}>
+                <Grid item xs={4} key={item.id}>
                 <Card>
                     <CardHeader
                     title={item.name}    />
                     <CardContent>
-                      Token ID: {item.id}
+                      Token ID: {item.id.toString()}
                       <br/>
                       {item.description}
                         <br/>
@@ -82,8 +83,9 @@ class Yournfts extends Component {
                     <InputLabel id="demo-simple-select-label">Auction method</InputLabel>
                     <form onSubmit={(event)=>{
                       event.preventDefault();
-                      const category = this.category.value
-                      const price = this.price.value
+                      const category = this.state.category
+                      const price = this.priceinput.current.value
+                      console.log(category,price)
                       this.props.listItem(item.id, category, price)
                     }}>
                     <Select
@@ -99,7 +101,8 @@ class Yournfts extends Component {
                       <MenuItem value="vickery">Vickery Auction</MenuItem>
                     </Select>
                     <br/><br/>
-                    <TextField id="price" ref={(input) => { this.price = input }} label="Auctioning Price" variant="outlined" required/>
+                    {/* <TextField id="price" ref={this.priceinput} label="Auctioning Price" variant="outlined" required/> */}
+                    <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.priceinput} placeholder="Auctioning Price"/>
                     <br/><br/>
                     <button type="submit" class="btn btn-info mb-3">Confirm</button>
                     </form>
@@ -108,7 +111,6 @@ class Yournfts extends Component {
                 </Grid>
             ))}
           </Grid>
-        ))}
         </div>
       </center>
       </React.Fragment>
