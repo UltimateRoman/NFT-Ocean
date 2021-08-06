@@ -64,7 +64,7 @@ class Dutch extends Component {
                         <br/>
                         Current Price: {window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether')} MATIC  
                         <br/>                 
-                    <img src={item.cid} height="250" width="350" alt="NFT image"/>
+                        <img src={`https://${item.cid}.ipfs.dweb.link`} height="250" width="350" alt="NFT image"/>
                     <br/><br/>
                     <h4 style={{color: "DarkCyan"}}>Bid for this NFT</h4>
                     <form onSubmit={(event)=>{

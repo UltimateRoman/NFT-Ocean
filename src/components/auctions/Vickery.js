@@ -57,24 +57,29 @@ class Vickery extends Component {
             {this.props.vickeryItems.map((item) => (
                 <Grid item xs={4} key={item.id}>
                 <Card>
-                    <CardHeader
-                    title={item.name}    />
+                    <Typography gutterBottom variant="h4" color="Primary" component="h1">
+                       {item.name}
+                     </Typography>
+                  
                     <CardContent>
-                      {item.description}
-                        <br/>              
-                        Current Price: {window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether')} MATIC  
-                    <img src={item.cid} height="250" width="350" alt="NFT image"/>
+                     
+                        <h5>
+                          {item.description}
+                        </h5>  
+                        <img src={`https://${item.cid}.ipfs.dweb.link`} height="250" width="400" alt="NFT image"/>
 
-                    <br/><br/>
+                    <br/><br/><hr/>
                     <h4 style={{color: "DarkCyan"}}>Bid for this NFT</h4>
                     <form onSubmit={(event)=>{
                       event.preventDefault();
                       const price = this.priceinput.current.value
                       this.props.makeOffer(item.id, price, "vickery")
                     }}>
-                    <br/><br/>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.priceinput} placeholder="Bid Price"/>
-                    <br/><br/>
+                    <br/>
+                    <div class="form-group mx-sm-5 mb-2">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.priceinput} placeholder="Bid Price (MATIC)"/>
+                    </div>
+                    <br/>
                     <button type="submit" class="btn btn-info mb-3">Make Offer</button>
                     </form>
                     <br/>

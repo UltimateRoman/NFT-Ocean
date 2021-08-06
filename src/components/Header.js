@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 import logo from '../logo.png';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 function Header() {
   return (
@@ -13,10 +14,10 @@ function Header() {
         <Navbar.Brand href="/">
           <img
             src={logo}
-            width="30"
-            height="30"
+            width="130"
+            height="80"
             className="d-inline-block align-top"
-            alt="React Boots logo"
+            alt="NFT Ocean Logo"
           />
         </Navbar.Brand>
       </Container>
@@ -54,8 +55,10 @@ function Header() {
           </Nav>
           
         </Navbar.Collapse>
+        
       </Navbar>
       <div style={{ paddingBottom: "8px", backgroundColor: "lightblue" }}></div>
+      <LinearProgress />
     </div>
   );
 }

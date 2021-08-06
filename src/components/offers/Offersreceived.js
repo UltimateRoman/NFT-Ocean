@@ -10,12 +10,13 @@ class Offersreceived extends Component {
                 <div className="row">
                     <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ margin: '0% 15%' }}>
                         <h1>Offers you have received</h1>
+                        <br/><br/>
                         {this.props.receivedOffers.map((offer, key) => {
                             return (
                                 <Card>
                                     <Card.Header>Offer for NFT {offer.tId.toString()}</Card.Header>
                                     <Card.Body>
-                            <Card.Title>Offered Amount: {window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether')} MATIC | $ {(parseInt(window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether'))*parseInt(this.props.latestPrice.toString())).toString()}</Card.Title>
+                            <Card.Title>Offered Amount: {window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether')} MATIC | $ {(parseFloat(window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether'))*parseFloat(this.props.latestPrice.toString())).toString()}</Card.Title>
                                         <Card.Text>
                                             Bidder: {offer.bidder}
                                         </Card.Text>

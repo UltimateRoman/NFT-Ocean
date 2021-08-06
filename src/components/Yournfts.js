@@ -49,8 +49,8 @@ class Yournfts extends Component {
     return (
       <React.Fragment>
           <br/><br/>          
-            <Typography component="h1" variant="h2" align="center" color="inherit" gutterBottom>
-                <WhiteTextTypography variant="h3">
+            <Typography component="h1" variant="h2" align="center" color="Secondary"  gutterBottom>
+                <WhiteTextTypography variant="h3"  >
                     Your NFTs
                 </WhiteTextTypography>
             </Typography>
@@ -68,18 +68,25 @@ class Yournfts extends Component {
             {this.props.myItems.map((item) => (
                 <Grid item xs={4} key={item.id}>
                 <Card>
-                    <CardHeader
-                    title={item.name}    />
+                    <Typography gutterBottom variant="h4" color="Primary" component="h1">
+                       {item.name}
+                     </Typography>
+                  
                     <CardContent>
+                      <h5>
                       Token ID: {item.id.toString()}
-                      <br/>
-                      {item.description}
+                      </h5>
+                    
+                        Base Price: {window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether')} MATIC | $ {(parseFloat(window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether'))*parseFloat(this.props.latestPrice.toString())).toString()}
+                        <br/>     
                         <br/>
-                        Base Price: {window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether')} MATIC | $ {(parseInt(window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether'))*parseInt(this.props.latestPrice.toString())).toString()}
-                        <br/>                 
-                    <img src={`${item.cid}.ipfs.dweb.link`} height="250" width="350" alt="NFT image"/>
-                    <br/><br/>
-                    <h4 style={{color: "DarkCyan"}}>List NFT for Auction</h4>
+                        <h5>
+                          {item.description}
+                        </h5>  
+                        
+                    <img src={`https://${item.cid}.ipfs.dweb.link`} height="250" width="450" alt="NFT image"/>
+                    <br/><br/><hr/>
+                    <h4 style={{color: "cornflowerBlue"}}>List NFT for Auction</h4>
                     <InputLabel id="demo-simple-select-label">Auction method</InputLabel>
                     <form onSubmit={(event)=>{
                       event.preventDefault();
@@ -88,6 +95,7 @@ class Yournfts extends Component {
                       console.log(category,price)
                       this.props.listItem(item.id, category, price)
                     }}>
+                    <div class="form-group mx-sm-5 mb-2">
                     <Select
                       labelId="demo-simple-select-label"
                       id="category"
@@ -101,8 +109,9 @@ class Yournfts extends Component {
                       <MenuItem value="vickery">Vickery Auction</MenuItem>
                     </Select>
                     <br/><br/>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.priceinput} placeholder="Auctioning Price" />
-                    <br/><br/>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.priceinput} placeholder="Auction Price (MATIC)"/>
+                    </div>
+                    <br/>
                     <button type="submit" class="btn btn-info mb-3">Confirm</button>
                     </form>
                     </CardContent>

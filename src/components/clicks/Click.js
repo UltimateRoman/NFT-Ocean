@@ -40,7 +40,7 @@ export default function Click() {
       </Button>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
-          Congrats you clicked a button
+          Congrats on being the top 10000000 to visit our website
         </Alert>
       </Snackbar>
     </div>

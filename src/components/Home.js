@@ -9,8 +9,8 @@ import Container from '@material-ui/core/Container';
 import img1 from './image/4.jpg'
 import img2 from './image/5.jpg'
 import img3 from './image/6.jpg'
+import Click from './clicks/Click'
 import LinearProgress from '@material-ui/core/LinearProgress';
-import Click from './Click'
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -49,18 +49,17 @@ function Homepage() {
 
   return (
     <React.Fragment>
-        <LinearProgress />
+        
       <CssBaseline />
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+            <Typography component="h1" variant="h2" align="center"  color="textPrimary" gutterBottom>
               NFT Ocean
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Something short and leading about the collection below—its contents, the creator, etc.
-              Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-              entirely.
+            An NFT Marketplace with custom Auction and Sales mechanisms based on user preference
+
             </Typography>
             <center>
             <Click />
@@ -121,9 +120,11 @@ function Homepage() {
         <Typography variant="h6" align="center" gutterBottom>
           NFT Ocean
         </Typography>
+        <br/>
         <LinearProgress color="secondary"/>
+        <br/>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Athul what should we add as footer
+        © 2021 NFT Ocean
         </Typography>
       </footer>
     </React.Fragment>

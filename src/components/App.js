@@ -118,6 +118,7 @@ class App extends Component {
     priceFeed.methods.latestRoundData().call()
     .then((roundData) => {
       this.setState({ latestPrice: roundData[1]/100000000 })
+      console.log(this.state.latestPrice)
     });
   }
   
@@ -193,8 +194,9 @@ class App extends Component {
     if(this.state.isConnected) {
       return (
         <Router>
-          <div style={{ height: 800 }}>
+          
           <Header />
+          <div style={{ height: 800 }}>
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/mint" render={props => (
