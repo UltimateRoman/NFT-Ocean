@@ -21,9 +21,9 @@ class Main extends Component {
       const options = {
         headers : {"Authorization": `Bearer ${process.env.REACT_APP_NFTKEY}`}
       }
-      axios.post("https://api.nft.storage/upload",formData,options)
+      axios.post("https://api.nft.storage/upload", formData, options)
       .then((result)=>{
-        this.props.mintItem(this.priceinput.current.value,this.nameinput.current.value,this.descinput.current.value,result.data.value.cid+"/"+result.data.value.files[0].name)
+        this.props.mintItem(this.priceinput.current.value, this.nameinput.current.value, this.descinput.current.value, result.data.value.cid+"/"+result.data.value.files[0].name)
         console.log(result.data.value.cid+"/"+result.data.value.files[0].name)})
     }
 

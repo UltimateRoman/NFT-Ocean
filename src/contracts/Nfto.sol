@@ -38,19 +38,6 @@ contract Nfto is ERC721 {
         bool isApproved;
     }
 
-    event ItemMinted(
-        uint id,
-        string name,
-        string description,
-        address payable owner
-    );
-
-    event ItemListed(
-        uint id,
-        uint eCount,
-        uint dCount,
-        bool isListed
-    );
     
     function mintItem(uint256 _price, string memory _name, string memory _description, string memory _cid) external {
         require(_price > 0, "Invalid price");
@@ -58,12 +45,10 @@ contract Nfto is ERC721 {
         _safeMint(msg.sender, tokenId);
         _setTokenURI(tokenId, _cid);
         items[tokenId] = Item(tokenId, _price, _name, _description, _cid, false, msg.sender);
-        emit ItemMinted(tokenId, _name, _description, msg.sender);
     }
 
 
     function listItem(uint _id, string memory _type, uint256 _price) external {
-        require(_id > 0 && _id <= tokenId, "Invalid Id");
 
         if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("english")))) {
             eCount++;
@@ -84,28 +69,15 @@ contract Nfto is ERC721 {
         }
 
         items[_id].isListed = true;
-        emit ItemListed(_id, eCount, dCount, items[_id].isListed);
     }
 
     function makeOffer(uint _id, uint _tId, uint256 _amount, string memory _type) external {
         Item memory _item = items[_tId];
 
         offerCount++;
-        offers[offerCount] = Offer(offerCount, _tId, _amount, msg.sender, _item.owner, false);
+        offers[offerCount] = Offer(offerCount, _tId, _amount, msg.sender, _item.owner, false);       
 
-        if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("english")))) {
-            Item memory item = english[_id];
-            item.latestPrice = _amount;
-            english[_id] = item;
-        }
-
-        else if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("dutch")))) {
-            Item memory item = dutch[_id];
-            item.latestPrice = _amount;
-            dutch[_id] = item;
-        }        
-
-        else if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("vickery")))) {
+        if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("vickery")))) {
             Item memory item = vickery[_id];
             uint i;
             uint largestAmount = 0;
@@ -129,8 +101,6 @@ contract Nfto is ERC721 {
     }
 
     function approveOffer(uint _id) external {
-        require(_id >=1 && _id <= offerCount, "Invalid offer");
-
         Offer memory offer = offers[_id];
         uint tId = offer.tId;
         address bidder = offer.bidder;
@@ -140,12 +110,10 @@ contract Nfto is ERC721 {
     }
 
 
-    function purchaseItem(uint _tId) public payable {
-        require(_tId >=1 && _tId <= tokenId, "Invalid id");
-
+    function purchaseItem(uint _tId) external payable {
         Item memory item = items[_tId];
         address payable owner = item.owner;
-        (bool isSent, bytes memory data) = owner.call{value: msg.value}("");
+        (bool isSent, ) = owner.call{value: msg.value}("");
 
         if(isSent) {
             safeTransferFrom(owner, msg.sender, _tId);
