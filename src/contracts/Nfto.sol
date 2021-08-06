@@ -111,6 +111,13 @@ contract Nfto is ERC721 {
         uint tId = offer.tId;
         address bidder = offer.bidder;
         offer.isApproved = true;
+        uint vid = 1;
+        for(uint j = 1; j <= vCount; j++) {
+            if(keccak256(abi.encodePacked((items[tId].name))) == keccak256(abi.encodePacked((vickery[j].name)))) {
+                vid = j;
+            }
+        }
+        offer.offerAmount = vickery[vid].latestPrice;
         offers[_id] = offer;
         approve(bidder, tId);
     }

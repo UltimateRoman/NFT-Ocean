@@ -13,6 +13,9 @@ import English from './auctions/English';
 import Dutch from './auctions/Dutch';
 import Vickery from './auctions/Vickery';
 
+import Offersplaced from './offers/Offersplaced';
+import Offersreceived from './offers/Offersreceived';
+
 
 class App extends Component {
 
@@ -235,6 +238,24 @@ class App extends Component {
                     this.state.loading
                       ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
                       : <Vickery vickeryItems={this.state.vickeryItems} makeOffer={this.makeOffer} />
+                  }
+                </React.Fragment>)} 
+            />
+            <Route exact path="/offersp" render={props => (
+                <React.Fragment>
+                  {
+                    this.state.loading
+                      ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
+                      : <Offersplaced placedOffers={this.state.placedOffers} purchaseItem={this.purchaseItem} />
+                  }
+                </React.Fragment>)} 
+            />
+            <Route exact path="/offersr" render={props => (
+                <React.Fragment>
+                  {
+                    this.state.loading
+                      ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
+                      : <Offersreceived receivedOffers={this.state.receivedOffers} approveOffer={this.approveOffer} />
                   }
                 </React.Fragment>)} 
             />

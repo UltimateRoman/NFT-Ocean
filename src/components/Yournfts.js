@@ -70,6 +70,8 @@ class Yournfts extends Component {
                     <CardHeader
                     title={item.name}    />
                     <CardContent>
+                      Token ID: {item.id}
+                      <br/>
                       {item.description}
                         <br/>
                         Base Price: {window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether')} MATIC  
