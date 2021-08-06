@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { TrinityRingsSpinner } from 'react-epic-spinners';
+import Nfto from '../abis/Nfto.json';
+import './App.css';
 import Web3 from 'web3';
+
 import Home from './Home';
 import Header from './Header'
 import Main from './Main';
-import Nfto from '../abis/Nfto.json';
-import { TrinityRingsSpinner } from 'react-epic-spinners';
-import './App.css';
 import Yournfts from './Yournfts';
+import English from './auctions/English';
+import Dutch from './auctions/Dutch';
+import Vickery from './auctions/Vickery';
+
+
 class App extends Component {
 
   async componentWillMount() {
@@ -202,6 +208,33 @@ class App extends Component {
                     this.state.loading
                       ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
                       : <Yournfts myItems={this.state.myItems} listItem={this.listItem}/>
+                  }
+                </React.Fragment>)} 
+            />
+            <Route exact path="/english" render={props => (
+                <React.Fragment>
+                  {
+                    this.state.loading
+                      ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
+                      : <English englishItems={this.state.englishItems} makeOffer={this.makeOffer} />
+                  }
+                </React.Fragment>)} 
+            />
+            <Route exact path="/dutch" render={props => (
+                <React.Fragment>
+                  {
+                    this.state.loading
+                      ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
+                      : <Dutch dutchItems={this.state.dutchItems} makeOffer={this.makeOffer} />
+                  }
+                </React.Fragment>)} 
+            />
+            <Route exact path="/vickery" render={props => (
+                <React.Fragment>
+                  {
+                    this.state.loading
+                      ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
+                      : <Vickery vickeryItems={this.state.vickeryItems} makeOffer={this.makeOffer} />
                   }
                 </React.Fragment>)} 
             />

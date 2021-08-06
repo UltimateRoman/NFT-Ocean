@@ -71,11 +71,17 @@ contract Nfto is ERC721 {
         items[_id].isListed = true;
     }
 
-    function makeOffer(uint _id, uint _tId, uint256 _amount, string memory _type) external {
-        Item memory _item = items[_tId];
+    function makeOffer(uint _id, uint256 _amount, string memory _type) external {
+
+        uint _tId = 1;
+        for(uint j = 1; j <= tokenId; j++) {
+            if(keccak256(abi.encodePacked((items[j].name))) == keccak256(abi.encodePacked((vickery[_id].name)))) {
+                _tId = j;
+            }
+        }
 
         offerCount++;
-        offers[offerCount] = Offer(offerCount, _tId, _amount, msg.sender, _item.owner, false);       
+        offers[offerCount] = Offer(offerCount, _tId, _amount, msg.sender, vickery[_id].owner, false);       
 
         if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("vickery")))) {
             Item memory item = vickery[_id];

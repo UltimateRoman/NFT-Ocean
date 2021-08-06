@@ -5,7 +5,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
-
 import Typography from "@material-ui/core/Typography";
 import {
   Grid,
@@ -29,18 +28,7 @@ const WhiteTextTypography = withStyles({
 
 
 
-class Yournfts extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      category: "english"
-    }
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  handleChange = (event) => {
-    this.setState({category: event.target.value});
-  }
+class English extends Component {
 
   render() {
     const {classes} = this.props
@@ -49,14 +37,14 @@ class Yournfts extends Component {
           <br/><br/>          
             <Typography component="h1" variant="h2" align="center" color="inherit" gutterBottom>
                 <WhiteTextTypography variant="h3">
-                    Your NFTs
+                    English Auction House
                 </WhiteTextTypography>
             </Typography>
           <br /><br/>
           
         <center>
         <div className={classes.root}>
-        {this.props.myItems.map((item) => (
+        {this.props.englishItems.map((item) => (
           <Grid
             container
             spacing={2}
@@ -64,7 +52,7 @@ class Yournfts extends Component {
             justify="flex-start"
             alignItems="flex-start"
           >
-            {this.props.myItems.map((item) => (
+            {this.props.englishItems.map((item) => (
                 <Grid item xs={3} key={item.id}>
                 <Card>
                     <CardHeader
@@ -72,35 +60,22 @@ class Yournfts extends Component {
                     <CardContent>
                       {item.description}
                         <br/>
-                        Base Price: {window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether')} MATIC  
+                        Current Price: {window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether')} MATIC  
                         <br/>                 
                     <img src={item.cid} height="250" width="350" alt="NFT image"/>
                     <br/><br/>
-                    <h4 style={{color: "DarkCyan"}}>List NFT for Auction</h4>
-                    <InputLabel id="demo-simple-select-label">Auction method</InputLabel>
+                    <h4 style={{color: "DarkCyan"}}>Bid for this NFT</h4>
                     <form onSubmit={(event)=>{
                       event.preventDefault();
-                      const category = this.category.value
                       const price = this.price.value
-                      this.props.listItem(item.id, category, price)
+                      this.props.makeOffer(item.id, price, "english")
                     }}>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="category"
-                      ref={(input) => { this.category = input }}
-                      value={this.state.category}
-                      onChange={this.handleChange}
-                      required
-                     >
-                      <MenuItem value="english">English Auction</MenuItem>
-                      <MenuItem value="dutch">Dutch Auction</MenuItem>
-                      <MenuItem value="vickery">Vickery Auction</MenuItem>
-                    </Select>
                     <br/><br/>
-                    <TextField id="price" ref={(input) => { this.price = input }} label="Auctioning Price" variant="outlined" required/>
+                    <TextField id="price" ref={(input) => { this.price = input }} label="Bid Price" variant="outlined" required/>
                     <br/><br/>
-                    <button type="submit" class="btn btn-info mb-3">Confirm</button>
+                    <button type="submit" class="btn btn-info mb-3">Make Offer</button>
                     </form>
+                    <br/>
                     </CardContent>
                   </Card>
                 </Grid>
@@ -114,4 +89,4 @@ class Yournfts extends Component {
     }
   }
   
-  export default withStyles(useStyles)(Yournfts);
+  export default withStyles(useStyles)(English);
