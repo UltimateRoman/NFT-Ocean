@@ -22,7 +22,7 @@ class App extends Component {
   async componentWillMount() {
     await this.loadWeb3()
     await this.loadBlockchainData()
-   // await this.fetchLatestPrice()
+    await this.fetchLatestPrice()
   }
 
   async loadWeb3() {
@@ -246,7 +246,7 @@ class App extends Component {
                   {
                     this.state.loading
                       ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
-                      : <Offersplaced placedOffers={this.state.placedOffers} purchaseItem={this.purchaseItem} />
+                      : <Offersplaced placedOffers={this.state.placedOffers} purchaseItem={this.purchaseItem}  latestPrice={this.state.latestPrice} />
                   }
                 </React.Fragment>)} 
             />
@@ -255,7 +255,7 @@ class App extends Component {
                   {
                     this.state.loading
                       ? <div class="center"><TrinityRingsSpinner size="100" color="darkblue" /></div>
-                      : <Offersreceived receivedOffers={this.state.receivedOffers} approveOffer={this.approveOffer} />
+                      : <Offersreceived receivedOffers={this.state.receivedOffers} approveOffer={this.approveOffer}  latestPrice={this.state.latestPrice} />
                   }
                 </React.Fragment>)} 
             />

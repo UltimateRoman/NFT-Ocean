@@ -53,21 +53,18 @@ contract Nfto is ERC721 {
         if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("english")))) {
             eCount++;
             english[eCount] = items[_id];
-            english[eCount].owner = msg.sender;
             english[eCount].latestPrice = _price;
         }
 
         else if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("dutch")))) {
             dCount++;
             dutch[dCount] = items[_id];
-            dutch[dCount].owner = msg.sender;
             dutch[dCount].latestPrice = _price;
         }
 
         else if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("vickery")))) {
             vCount++;
             vickery[vCount] = items[_id];
-            vickery[vCount].owner = msg.sender;
             vickery[vCount].latestPrice = _price;
         }
 
@@ -76,24 +73,24 @@ contract Nfto is ERC721 {
 
     function makeOffer(uint _id, uint256 _amount, string memory _type) external {
 
-        uint _tId = 1;
-        for(uint j = 1; j <= tokenId; j++) {
-            if(keccak256(abi.encodePacked((items[j].name))) == keccak256(abi.encodePacked((vickery[_id].name)))) {
-                _tId = j;
+        uint j;
+        for(j = 1; j <= vCount; j++) {
+            if(keccak256(abi.encodePacked((items[_id].name))) == keccak256(abi.encodePacked((vickery[j].name)))) {
+                break;
             }
         }
 
         offerCount++;
-        offers[offerCount] = Offer(offerCount, _tId, _amount, msg.sender, vickery[_id].owner, false);       
+        offers[offerCount] = Offer(offerCount, _id, _amount, msg.sender, vickery[j].owner, false);       
 
         if(keccak256(abi.encodePacked((_type))) == keccak256(abi.encodePacked(("vickery")))) {
-            Item memory item = vickery[_id];
+            Item memory item = vickery[j];
             uint i;
             uint largestAmount = 0;
             uint seclargestAmount = largestAmount;
 
             for(i = 1; i <= offerCount; ++i) {
-                if(offers[i].tId == vickery[_id].id) {                    
+                if(offers[i].tId == vickery[j].id) {                    
                     if(offers[i].offerAmount > largestAmount) {
                         seclargestAmount = largestAmount;
                         largestAmount = offers[i].offerAmount;
@@ -105,24 +102,22 @@ contract Nfto is ERC721 {
             }
 
             item.latestPrice = seclargestAmount;
-            vickery[_id] = item;
+            vickery[j] = item;
         }
     }
 
     function approveOffer(uint _id) external {
         Offer memory offer = offers[_id];
-        uint tId = offer.tId;
-        address bidder = offer.bidder;
         offer.isApproved = true;
-        uint vid = 1;
-        for(uint j = 1; j <= vCount; j++) {
-            if(keccak256(abi.encodePacked((items[tId].name))) == keccak256(abi.encodePacked((vickery[j].name)))) {
-                vid = j;
+        uint j;
+        for(j = 1; j <= vCount; j++) {
+            if(keccak256(abi.encodePacked((items[offer.tId].name))) == keccak256(abi.encodePacked((vickery[j].name)))) {
+                break;
             }
         }
-        offer.offerAmount = vickery[vid].latestPrice;
+        offer.offerAmount = vickery[j].latestPrice;
         offers[_id] = offer;
-        approve(bidder, tId);
+        approve(offer.bidder, offer.tId);
     }
 
 

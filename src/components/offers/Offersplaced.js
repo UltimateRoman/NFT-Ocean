@@ -15,7 +15,7 @@ class Offersplaced extends Component {
                                 <Card>
                                     <Card.Header>Bid for NFT {offer.tId.toString()}</Card.Header>
                                     <Card.Body>
-                                        <Card.Title>Bid Amount: {window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether')} MATIC</Card.Title>
+                                        <Card.Title>Bid Amount: {window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether')} MATIC | $ {(parseInt(window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether'))/parseInt(this.props.latestPrice.toString())).toString()}</Card.Title>
                                         <Card.Text>
                                             Auctioneer: {offer.auctioneer}
                                         </Card.Text>
