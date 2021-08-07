@@ -127,7 +127,7 @@ class App extends Component {
     this.state.nfto.methods.mintItem(window.web3.utils.toWei(price.toString(), 'ether'), name, description, cid).send({ from: this.state.account })
     .once('confirmation', (n, receipt) => {
       this.setState({ loading: false })
-      window.location.href = '/'
+      window.location.href = '/yournfts'
     })
   }
 
@@ -145,7 +145,7 @@ class App extends Component {
     this.state.nfto.methods.makeOffer(id, window.web3.utils.toWei(amount.toString(), 'ether'), type).send({ from: this.state.account })
     .once('confirmation', (n, receipt) => {
       this.setState({ loading: false })
-      window.location.href = '/'
+      window.location.href = '/offersp'
     })
   }
 
@@ -154,7 +154,7 @@ class App extends Component {
     this.state.nfto.methods.approveOffer(id).send({ from: this.state.account })
     .once('confirmation', (n, receipt) => {
       this.setState({ loading: false })
-      window.location.href = '/'
+      window.location.href = '/offersr'
     })
   }
 
@@ -163,7 +163,7 @@ class App extends Component {
     this.state.nfto.methods.purchaseItem(tId).send({ from: this.state.account, value: window.web3.utils.toWei(amount.toString(), 'ether') })
     .once('confirmation', (n, receipt) => {
       this.setState({ loading: false })
-      window.location.href = '/'
+      window.location.href = '/yournfts'
     })
   }
   
