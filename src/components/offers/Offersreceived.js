@@ -28,14 +28,15 @@ class Offersreceived extends Component {
                     <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ margin: '0% 15%' }}>
                         <h1 style={{ color: "DodgerBlue" }}>Offers you have received</h1>
                         <br/><br/>
-
-                        {this.props.filteredOffers.map((offer) => {
+                        <input placeholder="Type here to search" style={{ width: '80%', margin: 'auto' }} type="text" class="form-control" value={this.state.search} onChange={this.updateSearch.bind(this)} />
+                        <br/>
+                        {filteredOffers.map((offer) => {
                             return (
                                 <div>
                                     <Card>
                                         <Card.Header>Offer received for NFT {offer.tId.toString()}</Card.Header>
                                         <Card.Body>
-                                            <Card.Title>Offered Amount: {window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether')} MATIC | $ {(parseFloat(window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether'))*parseFloat(this.props.latestPrice.toString())).toString()}</Card.Title>
+                                            <Card.Title>Offered Amount: {window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether')} MATIC | $ {(Math.round(parseFloat(window.web3.utils.fromWei(offer.offerAmount.toString(), 'Ether'))*parseFloat(this.props.latestPrice.toString())*10000)/10000).toString()}</Card.Title>
                                             <Card.Text>
                                                 Bidder: {offer.bidder}
                                             </Card.Text>

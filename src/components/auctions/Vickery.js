@@ -6,7 +6,6 @@ import {
   Grid,
   Card,
   CardContent,
-  CardHeader
 } from "@material-ui/core/";
 
 const useStyles = ({
@@ -53,7 +52,7 @@ class Vickery extends Component {
           >
             {this.props.vickeryItems.map((item) => (
               <Grid item xs={4} key={item.id}>
-                <Card>
+                <Card style={{ padding: "5px", borderRadius: "10px", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"}}>
                     <Typography gutterBottom variant="h4" color="Primary" component="h1">
                        {item.name}
                      </Typography>

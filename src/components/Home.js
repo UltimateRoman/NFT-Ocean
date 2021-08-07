@@ -68,7 +68,7 @@ function Homepage() {
         </div>
 
         <Container maxWidth="md">
-          <Card>
+          <Card style={{ padding: "5px", borderRadius: "10px", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" }}>
             <CardMedia
               className={classes.cardMedia}
               image={img2}
@@ -83,8 +83,8 @@ function Homepage() {
               </Typography>
             </CardContent>
           </Card>
-
-          <Card>
+          <br/><br/>
+          <Card style={{ padding: "5px", borderRadius: "10px", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" }}>
             <CardMedia
               className={classes.cardMedia}
               image={img3}
@@ -99,8 +99,8 @@ function Homepage() {
               </Typography>
             </CardContent>
           </Card>
-
-          <Card>
+            <br/><br/>
+          <Card style={{ padding: "5px", borderRadius: "10px", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" }}>
             <CardMedia
               className={classes.cardMedia}
               image={img1}

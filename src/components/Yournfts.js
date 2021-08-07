@@ -74,7 +74,7 @@ class Yournfts extends Component {
                   <CardContent>
                     <h5 style={{ color: "SlateBlue"}}>Token ID: {item.id.toString()}</h5>
                     
-                    Base Price: {window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether')} MATIC | $ {(parseFloat(window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether'))*parseFloat(this.props.latestPrice.toString())).toString()}
+                    Base Price: {window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether')} MATIC | $ {(Math.round(parseFloat(window.web3.utils.fromWei(item.latestPrice.toString(), 'Ether'))*parseFloat(this.props.latestPrice.toString())*10000)/10000).toString()}
                     <br/><br/>
                     
                     <h5 style={{ color: "DarkBlue"}}>{item.description}</h5>  
