@@ -193,8 +193,7 @@ class App extends Component {
   render() {
     if(this.state.isConnected) {
       return (
-        <Router>
-          
+        <Router>          
           <Header />
           <div style={{ height: 800 }}>
           <Switch>
@@ -268,7 +267,7 @@ class App extends Component {
       );
     } else {
       return(
-        <p style={{textAlign: "center"}}>Your current browser is not supported. Install the Metamask extension and try again.</p>
+        <p style={{textAlign: "center", fontSize: "30 px"}}>Your current browser is not supported. Install the Metamask extension and try again.</p>
       );
     }
   }
